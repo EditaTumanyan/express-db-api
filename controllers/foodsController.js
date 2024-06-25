@@ -8,10 +8,20 @@ const createFood = async (req, res) => {
     return res.status(400).json({ message: errorMessages.join(", ") });
   }
 
-  const { name, price } = req.body;
+  const { name, price, shop_id } = req.body;
+
+  const shopExists = await db
+    .getInstance()("shops")
+    .where({ id: shop_id })
+    .first();
+  if (!shopExists) {
+    return res
+      .status(404)
+      .json({ message: `Shop with id ${shop_id} does not exist` });
+  }
 
   try {
-    await db.getInstance()("foods").insert({ name, price });
+    await db.getInstance()("foods").insert({ name, price, shop_id });
     return res.status(201).json({ message: "Food created" });
   } catch (error) {
     console.error("Error creating food:", error.message);

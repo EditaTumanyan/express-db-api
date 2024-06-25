@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   development: {
     client: "pg",
@@ -8,11 +10,10 @@ module.exports = {
       database: "foods_db",
     },
     migrations: {
-      tableName: "knex_migrations",
-      directory: "./migrations",
+      directory: path.resolve(__dirname, "../migrations"),
     },
     seeds: {
-      directory: "./seeds",
+      directory: path.resolve(__dirname, "../seeds"),
     },
   },
 };

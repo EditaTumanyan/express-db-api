@@ -1,5 +1,6 @@
 const express = require("express");
 const foodsRoutes = require("./routes/foodsRoutes");
+const shopsRoutes = require("./routes/shopsRoutes");
 const Database = require("./database/db");
 
 const app = express();
@@ -9,6 +10,7 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use("/foods", foodsRoutes);
+app.use("/shops", shopsRoutes);
 
 (async () => {
   await Database.migrate();

@@ -11,6 +11,11 @@ const foodSchema = joi.object({
     "number.base": "Price must be a number",
     "number.positive": "Price must be a positive number",
   }),
+  shop_id: joi.number().positive().required().messages({
+    "any.required": "Shop ID is required",
+    "number.base": "Shop ID must be a number",
+    "number.positive": "Shop ID must be a positive number",
+  }),
 });
 
 module.exports = { foodSchema };
